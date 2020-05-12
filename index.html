@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style id="style">
+        body {
+            margin: 0;
+            background-color: black;
+            overflow: hidden;
+        }
+
+        .matrix {
+            width: 100%;
+            height: 100%;
+        }
+
+        .rotate {
+            color: rgb(34, 238, 34);
+            /* font-size: 22px; */
+            font-weight: bold;
+        }
+
+        .element {
+            box-shadow: 0px 0px 5px 5px rgb(2, 250, 6);
+            color: rgb(2, 250, 6)
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .animate {
+            position: absolute;
+            animation: drop 5s linear infinite;
+            text-align: center;
+            width: 15px;
+            color: rgb(252, 5, 5);
+            font-weight: bold;
+            list-style: none;
+        }
+        #rotate55 {
+            color: red;
+            /* font-size: 22px; */
+            font-weight: bold;
+        }
+        #rotate99 {
+            color: rgb(58, 110, 255);
+            /* font-size: 22px; */
+            font-weight: bold;
+        }
+        @keyframes drop {
+            0% {
+                transform: translateY(0px);
+            }
+
+            100% {
+                transform: translateY(120vh);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="matrix" class="matrix">
+
+    </div>
+
+    <script>
+        function c(data) {
+            console.log(data);
+        }
+
+        // auto config
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        var naDesno = Math.floor(Math.round(width / 15));
+        var minLeft = 5;
+        var minLeft2 = 5;
+        var minLeft3 = 5;
+        var minLeft4 = 5;
+        var minLeft5 = 5;
+        var registry = [];
+        var recycle1 = [];
+        var recycle2 = [];
+        var recycle3 = [];
+        c("Rezolucija: " + width + " x " + height);
+        c("Na desno " + naDesno)
+        c("Na desno " + naDesno / 2 + " elementa")
+        // auto config and
+
+        const charActers = ['さ', 'に', 'ア', 'る', 'ふ', 'ウ', 'エ', 'テ', 'ル', 'ヤ', 'ネ', 'セ', 'タ', 'ヨ', 'オ', 'ザ', 'ゼ',
+            'ヅ', 'ヰ',
+            'レ', 'ハ', 'ふ', 'け', 'り', 'ろ', 'に'
+        ];
+
+        for (i = 0; i < naDesno / 2; i++) {
+
+            const matrix = document.getElementById("matrix");
+
+            /* const rC1 = Math.round(Math.random() * (25 - 0) + 0);
+               const rC2 = Math.round(Math.random() * (25 - 0) + 0);
+               const rC3 = Math.round(Math.random() * (25 - 0) + 0);
+               const rC4 = Math.round(Math.random() * (25 - 0) + 0);
+               const rC5 = Math.round(Math.random() * (25 - 0) + 0);
+               const rC6 = Math.round(Math.random() * (25 - 0) + 0);
+               const rC7 = Math.round(Math.random() * (25 - 0) + 0);
+               const rC8 = Math.round(Math.random() * (25 - 0) + 0);
+
+               const char1 = charActers[rC1];
+               const char2 = charActers[rC2];
+               const char3 = charActers[rC3];
+               const char4 = charActers[rC4];
+               const char5 = charActers[rC5];
+               const char6 = charActers[rC6];
+               const char7 = charActers[rC7];
+               const char8 = charActers[rC8]; */
+
+            if (minLeft < width) {
+                // random static
+                /* matrix.innerHTML +=
+                    "<div class='animate" + i + "' style='margin-left: " + minLeft + "px; margin-top: -" + rH1 +
+                    "px'><span class='rotate'>" + char1 +
+                    "</span><br><span  class='rotate'>" + char2 + "</span><br><span class='rotate'>" + char3 + "</span><br><span  class='rotate'>" + char4 +
+                    "</span><br><span class='rotate'>" + char5 + "</span><br><span class='rotate'>" + char6 + "</span><br><span class='rotate'>" +
+                    char7 +
+                    "</span><br><span class='rotate'>" + char8 + "</span><br><span class='element'></span></div>"; */
+
+                // random dynamic
+                const rH1 = Math.floor(Math.random() * (800 - 350) + 350);
+
+                matrix.innerHTML +=
+                    "<div class='animate" + i + "' id='diva" + i + "' style='position: absolute;margin-left: " +
+                    minLeft + "px; margin-top: -" + rH1 +
+                    "px'><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span  class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span  class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='element'></span></div>";
+                minLeft = minLeft + 30;
+                recycle1.push(i);
+                var generateStyle = document.getElementById("style");
+                generateStyle.innerHTML += ".animate" + i + "{position: absolute;animation: drop" + i +
+                    " 6s linear infinite;text-align: center;width: 15px;color: rgb(74, 255, 50);font-weight: bold;list-style: none;} @keyframes drop" +
+                    i + "{0% {transform: translateY(-" + rH1 + "px);}100% {transform: translateY(190vh);}}";
+
+            }
+        } // and for
+
+        for (let i = recycle1.length; i < naDesno; i++) {
+            const rH2 = Math.floor(Math.random() * (800 - 350) + 350);
+            matrix.innerHTML +=
+                "<div id='divb" + i + "' style='position: absolute; margin-left: " + minLeft2 + "px; margin-top: -" +
+                rH2 +
+                "px'><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='element'></span></div>";
+            minLeft2 = minLeft2 + 30;
+            recycle2.push(i);
+            var generateStyle = document.getElementById("style");
+            generateStyle.innerHTML += ".animate" + i + "{position: absolute;animation: drop" + i +
+                " 6s linear infinite;text-align: center;width: 15px;color: rgb(74, 255, 50);font-weight: bold;list-style: none;} @keyframes drop" +
+                i + "{0% {transform: translateY(-" + rH2 + "px);}100% {transform: translateY(190vh);}}";
+        }
+
+        for (let i = recycle2[0]; i < recycle2[0] + recycle2.length; i++) {
+            const rH3 = Math.floor(Math.random() * (800 - 350) + 350);
+            matrix.innerHTML +=
+                "<div id='divc" + i + "' style='position: absolute; margin-left: " + minLeft3 + "px; margin-top: -" +
+                rH3 +
+                "px'><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span  class='rotate'></span><br><span class='rotate'></span><br><span  class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='rotate'></span><br><span class='element'></span></div>";
+            minLeft3 = minLeft3 + 30;
+            recycle3.push(i);
+            var generateStyle = document.getElementById("style");
+            generateStyle.innerHTML += ".animate" + i + "{position: absolute;animation: drop" + i +
+                " 6s linear infinite;text-align: center;width: 15px;color: rgb(74, 255, 50);font-weight: bold;list-style: none;} @keyframes drop" +
+                i + "{0% {transform: translateY(-" + rH3 + "px);}100% {transform: translateY(190vh);}}";
+        }
+
+        // rotate body
+        const elementiB = document.getElementById("matrix").querySelectorAll(".rotate");
+
+        for (var i = 0; i < elementiB.length; i++) {
+            document.getElementById("matrix").querySelectorAll(".rotate")[i].setAttribute("id", "rotate" +
+                i);
+        }
+
+        setInterval(() => {
+            for (var i = 0; i < elementiB.length; i++) {
+                const randomB = Math.floor(Math.random() * (25 - 0) + 0);
+                document.getElementById("rotate" + i).innerHTML = charActers[randomB];
+            }
+
+        }, 250);
+        //and rotate body
+
+        // rotate head
+        const elementi = document.getElementById("matrix").querySelectorAll(".element");
+
+        for (var i = 0; i < elementi.length; i++) {
+            document.getElementById("matrix").querySelectorAll(".element")[i].setAttribute("id", "element" +
+                i);
+        }
+
+        setInterval(() => {
+            for (var i = 0; i < elementi.length; i++) {
+                const random = Math.floor(Math.random() * (25 - 0) + 0);
+                document.getElementById("element" + i).innerHTML = charActers[random];
+            }
+
+        }, 200);
+        //and rotate head
+        
+        setTimeout(() => {
+            for (var i = recycle2[0]; i < recycle2[0] + recycle2.length; i++) {
+                var getID = "divb" + i;
+
+                var reuse = document.getElementById(getID);
+                reuse.classList.add("animate" + i);
+                // delete recycle[0];
+                
+                
+            }
+        }, 2000);
+        setTimeout(() => {
+        for (var i = recycle3[0]; i < recycle3[0] + recycle3.length; i++) {
+                var getID = "divc" + i;
+
+                var reuse = document.getElementById(getID);
+                reuse.classList.add("animate" + i);
+                // delete recycle[0];
+                
+                
+            }
+        }, 4000);
+        c(recycle2)
+        c(recycle3)
+    </script>
+</body>
+
+</html>
